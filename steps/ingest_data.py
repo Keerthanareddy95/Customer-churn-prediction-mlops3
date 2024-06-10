@@ -1,5 +1,4 @@
 import logging
-
 import pandas as pd
 from zenml import step
 
@@ -14,8 +13,11 @@ class IngestData:
 
     def get_data(self):
         logging.info(f"Ingesting data from {self.data_path}")
-        return pd.read_csv(self.data_path)
-    
+        data = pd.read_csv(self.data_path)
+        print("Columns in the ingested dataframe: ", data.columns.tolist())
+        print(data.head())  # Print the first few rows of the dataframe for verification
+        return data
+
 @step
 def ingest_df(data_path: str) -> pd.DataFrame:
     """
